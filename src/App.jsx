@@ -7,6 +7,9 @@ import Countdown from './components/Countdown';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSun, faMoon, faCloudSun, faCloudMoon, faPrayingHands } from '@fortawesome/free-solid-svg-icons';
 
+// For Local Prayer Times Data
+import localPrayerTimes from './data/prayerTimes.json';
+
 // CSS Source
 import './App.css'
 
@@ -90,13 +93,22 @@ function App() {
   };
   
 
-  const fetchPrayerTimes = async () => {
-    const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Dhaka&country=Bangladesh');
-    const data = await response.json();
-    const times = data.data.timings;
-    setPrayerTimes(times);
-    updatePrayerStates(times);
-  };
+  // const fetchPrayerTimes = async () => {
+  //   const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Dhaka&country=Bangladesh');
+  //   const data = await response.json();
+  //   const times = data.data.timings;
+
+  //   console.log(data)
+  //   console.log(data.data.timings)
+
+  //   setPrayerTimes(times);
+  //   updatePrayerStates(times);
+  // };
+
+  const fetchPrayerTimes = () => {
+    setPrayerTimes(localPrayerTimes);
+    updatePrayerStates(localPrayerTimes);
+  };  
 
   const updatePrayerStates = (times) => {
     const now = new Date();
