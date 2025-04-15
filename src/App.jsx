@@ -17,7 +17,7 @@ library.add(faSun, faMoon, faCloudSun, faCloudMoon, faPrayingHands);
 
 const styles = {
   appContainer: {
-    padding: '15px 2rem',
+    // padding: '15px 2rem',
     maxWidth: '700px',
     margin: 'auto',
     background: '#f7f9fc',
@@ -172,7 +172,7 @@ function App() {
       )}
 
 
-      <div style={styles.appContainer}>
+      <div className="appContainer" style={styles.appContainer}>
         <h1 style={styles.title}>🕌 Prayer Times</h1>
         <DigitalClock is12HourFormat={is12HourFormat} />
         <TimeFormatToggle is12HourFormat={is12HourFormat} setIs12HourFormat={setIs12HourFormat} />
