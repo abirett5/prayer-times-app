@@ -135,16 +135,18 @@ function App() {
     const diff = nextTime - now;
   
     if (diff <= 0) {
-      setTimeUntilNextPrayer("00:00:00");
+      // setTimeUntilNextPrayer("00:00:00");
+      setTimeUntilNextPrayer("Prayer time now");
       playAlertSound();
       showPrayerNotification(nextPrayer);  // 🔔 Show notification
-      return;
+      // return;
+    } else {
+      
+      const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
+      const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+      const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+      setTimeUntilNextPrayer(`${hours}:${minutes}:${seconds}`);
     }
-  
-    const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
-    const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-    setTimeUntilNextPrayer(`${hours}:${minutes}:${seconds}`);
   };
 
   useEffect(() => { fetchPrayerTimes(); }, []);
