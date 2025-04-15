@@ -135,18 +135,16 @@ function App() {
     const diff = nextTime - now;
   
     if (diff <= 0) {
-      // setTimeUntilNextPrayer("00:00:00");
-      setTimeUntilNextPrayer("Prayer time now");
+      setTimeUntilNextPrayer("00:00:00");
       playAlertSound();
       showPrayerNotification(nextPrayer);  // 🔔 Show notification
-      // return;
-    } else {
-      
-      const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
-      const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-      const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-      setTimeUntilNextPrayer(`${hours}:${minutes}:${seconds}`);
-    }
+      return;
+    } 
+
+    const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
+    const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+    setTimeUntilNextPrayer(`${hours}:${minutes}:${seconds}`);
   };
 
   useEffect(() => { fetchPrayerTimes(); }, []);
@@ -187,7 +185,10 @@ function App() {
               prayerInfo={prayerInfo}
               is12HourFormat={is12HourFormat}
             />
-            <Countdown nextPrayer={nextPrayer} remainingTime={timeUntilNextPrayer} />
+            
+            {(currentPrayer !== 'Isha' || new Date().getHours() >= 0 && new Date().getHours() < 6) && (
+              <Countdown nextPrayer={nextPrayer} remainingTime={timeUntilNextPrayer} />
+            )}
           </>
         )}
       </div>
