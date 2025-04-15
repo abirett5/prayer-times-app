@@ -65,7 +65,7 @@ function App() {
     }
   }, []);
 
-  // console.log(Notification.permission)
+  console.log(Notification.permission)
 
   const showPrayerNotification = (prayerName) => {
     if (Notification.permission === 'granted') {
